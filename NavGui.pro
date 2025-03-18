@@ -16,9 +16,11 @@ SOURCES += \
     navbar.cpp \
     widgetframe/windowbar.cpp \
     widgetframe/windowbutton.cpp \
+    widgettools/ElaText.cpp \
     widgettools/ElaTheme.cpp \
     widgettools/ElaToggleButton.cpp \
     widgettools/ElaToggleSwitch.cpp \
+    widgettools/private/ElaTextPrivate.cpp \
     widgettools/private/ElaThemePrivate.cpp \
     widgettools/private/ElaToggleButtonPrivate.cpp \
     widgettools/private/ElaToggleSwitchPrivate.cpp
@@ -31,9 +33,11 @@ HEADERS += \
     widgetframe/windowbutton.h \
     widgetframe/windowbutton_p.h \
     widgettools/Def.h \
+    widgettools/ElaText.h \
     widgettools/ElaTheme.h \
     widgettools/ElaToggleButton.h \
     widgettools/ElaToggleSwitch.h \
+    widgettools/private/ElaTextPrivate.h \
     widgettools/private/ElaThemePrivate.h \
     widgettools/private/ElaToggleButtonPrivate.h \
     widgettools/private/ElaToggleSwitchPrivate.h \

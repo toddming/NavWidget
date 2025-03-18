@@ -13,12 +13,15 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QStackedWidget>
+#include <QTimer>
 
 #include <QWKWidgets/widgetwindowagent.h>
 #include <widgetframe/windowbar.h>
 #include <widgetframe/windowbutton.h>
 #include "navbar.h"
 #include "widgettools/ElaToggleSwitch.h"
+#include "widgettools/ElaText.h"
+#include "widgettools/ElaTheme.h"
 
 
 class MainWindow : public QMainWindow
@@ -29,15 +32,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    enum Theme {
-        Dark,
-        Light,
-    };
-    Q_ENUM(Theme)
-
-Q_SIGNALS:
-    void themeChanged();
-
 protected:
     bool event(QEvent *event) override;
 
@@ -46,9 +40,7 @@ private:
 
     void initUI();
 
-    void loadStyleSheet(Theme theme);
-
-    Theme currentTheme{};
+    void loadStyleSheet(ElaThemeType::ThemeMode theme);
 
     QWK::WidgetWindowAgent *windowAgent;
 

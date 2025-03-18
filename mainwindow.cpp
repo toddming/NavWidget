@@ -9,9 +9,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     initUI();
 
-    loadStyleSheet(Dark);
+    loadStyleSheet(eTheme->getThemeMode());
+
     setWindowTitle("");
+
     resize(800, 600);
+
+    connect(eTheme, &ElaTheme::themeModeChanged, this, &MainWindow::loadStyleSheet);
 }
 
 MainWindow::~MainWindow()
@@ -168,23 +172,17 @@ void MainWindow::installWindowAgent() {
 
 }
 
-void MainWindow::loadStyleSheet(Theme theme) {
-    if (!styleSheet().isEmpty() && theme == currentTheme)
-        return;
-    currentTheme = theme;
-    navBar->changeTheme(int(theme));
-    if (QFile qss(theme == Dark ? QStringLiteral(":/style/dark-style.qss")
+void MainWindow::loadStyleSheet(ElaThemeType::ThemeMode theme) {
+    if (QFile qss(theme == ElaThemeType::Dark ? QStringLiteral(":/style/dark-style.qss")
                   : QStringLiteral(":/style/light-style.qss"));
             qss.open(QIODevice::ReadOnly | QIODevice::Text)) {
         setStyleSheet(QString::fromUtf8(qss.readAll()));
-        Q_EMIT themeChanged();
     }
 }
 
 void MainWindow::initUI()
 {
     QWidget *w = new QWidget(this);
-    w->setStyleSheet("QWidget{background-color:transparent;}");
     setCentralWidget(w);
 
     stackedWidget = new QStackedWidget(w);
@@ -201,9 +199,15 @@ void MainWindow::initUI()
     QWidget *widget_1 = new QWidget(w);
     stackedWidget->addWidget(widget_1);
 
+    ElaToggleSwitch *_switch = new ElaToggleSwitch(widget_1);
+
+    connect(_switch, &ElaToggleSwitch::toggled, this, [=](bool checked){
+        eTheme->setThemeMode(checked ? ElaThemeType::Dark : ElaThemeType::Light);
+    });
+
     QHBoxLayout *h_lay = new QHBoxLayout(widget_1);
     h_lay->addStretch();
-    h_lay->addWidget(new QLabel("开关", this));
-    h_lay->addWidget(new ElaToggleSwitch(this));
+    h_lay->addWidget(new ElaText("深色模式", 13, widget_1));
+    h_lay->addWidget(_switch);
     h_lay->addStretch();
 }

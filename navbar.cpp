@@ -8,7 +8,9 @@ NavBar::NavBar(QWidget *parent) : QFrame(parent)
     connect(buttonGroup, &QButtonGroup::buttonClicked,
             this, &NavBar::on_btnGroup_clicked);
 
-    changeTheme(1);
+    changeTheme(eTheme->getThemeMode());
+
+    connect(eTheme, &ElaTheme::themeModeChanged, this, &NavBar::changeTheme);
 }
 
 void NavBar::paintEvent(QPaintEvent *event)
@@ -140,14 +142,14 @@ void NavBar::on_btnGroup_clicked(QAbstractButton *btn)
     update();
 }
 
-void NavBar::changeTheme(int theme) {
-    if (theme == 0) {
+void NavBar::changeTheme(ElaThemeType::ThemeMode theme) {
+    if (theme == ElaThemeType::Dark) {
         cover_color = QColor(255, 255, 255, 30);
         QString qss = "QFrame{background-color:transparent;}"
                        "QPushButton{background-color:transparent;border-style:none;color:#D1D1D1;font: 12pt \"Microsoft YaHei\";}"
                        "QPushButton:checked{color:white;}";
         setStyleSheet(qss);
-    } else if (theme == 1) {
+    } else {
         cover_color = QColor(0, 0, 0, 10);
         QString qss = "QFrame{background-color:transparent;}"
                        "QPushButton{background-color:transparent;border-style:none;color:#808080;font: 12pt \"Microsoft YaHei\";}"

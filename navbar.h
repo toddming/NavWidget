@@ -15,6 +15,8 @@
 #include <QPainterPath>
 #include <QDebug>
 
+#include "widgettools/ElaTheme.h"
+
 
 enum NavType {
     NavLeft = 0,
@@ -33,13 +35,13 @@ public:
 
     void handleResize();
 
-    void changeTheme(int);
-
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
 
 private slots:
     void on_btnGroup_clicked(QAbstractButton *btn);
+
+    void changeTheme(ElaThemeType::ThemeMode theme);
 
 private:
     QButtonGroup *buttonGroup;
