@@ -33,8 +33,8 @@ QWK--WindowBar>QAbstractButton[system-button=true] {
 }
 
 QWK--WindowBar>QAbstractButton#pin-button {
-    qproperty-iconNormal: url(":/window-bar/pin.svg");
-    qproperty-iconChecked: url(":/window-bar/pin-fill.svg");
+    qproperty-iconNormal: url(":/window-bar/pin_dark.svg");
+    qproperty-iconChecked: url(":/window-bar/pin-fill_dark.svg");
     qproperty-iconSize: 15px 15px;
 }
 
@@ -44,7 +44,7 @@ QWK--WindowBar>QAbstractButton#pin-button:pressed {
 }
 
 QWK--WindowBar>QAbstractButton#min-button {
-    qproperty-iconNormal: url(":/window-bar/minimize.svg");
+    qproperty-iconNormal: url(":/window-bar/minimize_dark.svg");
 }
 
 QWK--WindowBar>QAbstractButton#min-button:hover,
@@ -53,8 +53,8 @@ QWK--WindowBar>QAbstractButton#min-button:pressed {
 }
 
 QWK--WindowBar>QAbstractButton#max-button {
-    qproperty-iconNormal: url(":/window-bar/maximize.svg");
-    qproperty-iconChecked: url(":/window-bar/restore.svg");
+    qproperty-iconNormal: url(":/window-bar/maximize_dark.svg");
+    qproperty-iconChecked: url(":/window-bar/restore_dark.svg");
 }
 
 QWK--WindowBar>QAbstractButton#max-button:hover,
@@ -63,7 +63,7 @@ QWK--WindowBar>QAbstractButton#max-button:pressed {
 }
 
 QWK--WindowBar>QAbstractButton#close-button {
-    qproperty-iconNormal: url(":/window-bar/close.svg");
+    qproperty-iconNormal: url(":/window-bar/close_dark.svg");
 }
 
 QWK--WindowBar>QAbstractButton#close-button:hover,
@@ -92,7 +92,7 @@ QMenuBar {
 }
 
 QMenuBar>QToolButton#qt_menubar_ext_button {
-    qproperty-icon: url(":/window-bar/more-line.svg");
+    qproperty-icon: url(":/window-bar/more-line_dark.svg");
 }
 
 QMenuBar>QToolButton#qt_menubar_ext_button:hover,

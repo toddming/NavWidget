@@ -14,8 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("");
 
     resize(800, 600);
-
-    connect(eTheme, &ElaTheme::themeModeChanged, this, &MainWindow::loadStyleSheet);
 }
 
 MainWindow::~MainWindow()
@@ -202,6 +200,7 @@ void MainWindow::initUI()
     ElaToggleSwitch *_switch = new ElaToggleSwitch(widget_1);
 
     connect(_switch, &ElaToggleSwitch::toggled, this, [=](bool checked){
+        loadStyleSheet(checked ? ElaThemeType::Dark : ElaThemeType::Light);
         eTheme->setThemeMode(checked ? ElaThemeType::Dark : ElaThemeType::Light);
     });
 
