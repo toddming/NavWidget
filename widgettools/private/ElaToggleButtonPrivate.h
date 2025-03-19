@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "../Def.h"
-#include "../stdafx.h"
+#include "Def.h"
+#include "stdafx.h"
 class ElaToggleButton;
 class ElaToggleButtonPrivate : public QObject
 {

@@ -19,9 +19,9 @@
 #include <widgetframe/windowbar.h>
 #include <widgetframe/windowbutton.h>
 #include "navbar.h"
-#include "widgettools/ElaToggleSwitch.h"
-#include "widgettools/ElaText.h"
-#include "widgettools/ElaTheme.h"
+#include "ElaToggleSwitch.h"
+#include "ElaText.h"
+#include "ElaTheme.h"
 
 
 class MainWindow : public QMainWindow

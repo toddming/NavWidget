@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "../Def.h"
-#include "../stdafx.h"
+#include "Def.h"
+#include "stdafx.h"
 class ElaToggleSwitch;
 class ElaToggleSwitchPrivate : public QObject
 {

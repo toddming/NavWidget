@@ -20,8 +20,8 @@ ElaText::ElaText(QWidget* parent)
     setFont(textFont);
     setWordWrap(true);
     d->_themeMode = eTheme->getThemeMode();
-    onThemeChanged(eTheme->getThemeMode());
-    connect(eTheme, &ElaTheme::themeModeChanged, this, &ElaText::onThemeChanged);
+    d->onThemeChanged(eTheme->getThemeMode());
+    connect(eTheme, &ElaTheme::themeModeChanged, d, &ElaTextPrivate::onThemeChanged);
 }
 
 ElaText::ElaText(QString text, QWidget* parent)
@@ -185,23 +185,4 @@ void ElaText::paintEvent(QPaintEvent* event)
             QLabel::paintEvent(event);
         }
     }
-}
-
-void ElaText::onThemeChanged(ElaThemeType::ThemeMode themeMode)
-{
-    Q_D(ElaText);
-    d->_themeMode = themeMode;
-    QPalette palette = this->palette();
-
-    if (themeMode == ElaThemeType::Light)
-    {
-        palette.setColor(QPalette::WindowText, Qt::black);
-        setPalette(palette);
-    }
-    else
-    {
-        palette.setColor(QPalette::WindowText, Qt::white);
-        setPalette(palette);
-    }
-    repaint();
 }

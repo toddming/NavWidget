@@ -1,7 +1,7 @@
 #include "ElaToggleButtonPrivate.h"
 
-#include "../ElaTheme.h"
-#include "../ElaToggleButton.h"
+#include "ElaTheme.h"
+#include "ElaToggleButton.h"
 ElaToggleButtonPrivate::ElaToggleButtonPrivate(QObject* parent)
     : QObject{parent}
 {

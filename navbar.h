@@ -15,7 +15,7 @@
 #include <QPainterPath>
 #include <QDebug>
 
-#include "widgettools/ElaTheme.h"
+#include "ElaTheme.h"
 
 
 enum NavType {

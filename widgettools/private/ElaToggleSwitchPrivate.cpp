@@ -2,7 +2,7 @@
 
 #include <QPropertyAnimation>
 
-#include "../ElaToggleSwitch.h"
+#include "ElaToggleSwitch.h"
 ElaToggleSwitchPrivate::ElaToggleSwitchPrivate(QObject* parent)
     : QObject{parent}
 {

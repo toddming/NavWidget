@@ -21,12 +21,6 @@ public:
     explicit ElaText(QString text, int pixelSize, QWidget* parent = nullptr);
     ~ElaText() override;
 
-private:
-    void onThemeChanged(ElaThemeType::ThemeMode themeMode);
-
-    void _changeTheme();
-
-
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };

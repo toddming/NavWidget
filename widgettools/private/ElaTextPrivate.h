@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "../Def.h"
-#include "../stdafx.h"
+#include "Def.h"
+#include "stdafx.h"
 class ElaText;
 class ElaTextPrivate : public QObject
 {
@@ -15,11 +15,13 @@ class ElaTextPrivate : public QObject
 public:
     explicit ElaTextPrivate(QObject* parent = nullptr);
     ~ElaTextPrivate() override;
+    Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
 
 private:
     ElaThemeType::ThemeMode _themeMode;
     bool _isWrapAnywhere{false};
     qreal _textSpacing{0.5};
+    void _changeTheme();
 };
 
 #endif // ELATEXTPRIVATE_H

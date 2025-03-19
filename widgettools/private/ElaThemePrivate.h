@@ -5,8 +5,8 @@
 #include <QMap>
 #include <QObject>
 
-#include "../Def.h"
-#include "../stdafx.h"
+#include "Def.h"
+#include "stdafx.h"
 class ElaTheme;
 class ElaThemePrivate : public QObject
 {
@@ -18,8 +18,8 @@ public:
 
 private:
     ElaThemeType::ThemeMode _themeMode{ElaThemeType::Light};
-    QColor _lightThemeColorList[44];
-    QColor _darkThemeColorList[44];
+    QColor _lightThemeColorList[40];
+    QColor _darkThemeColorList[40];
     void _initThemeColor();
 };
 
