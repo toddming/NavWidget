@@ -16,7 +16,7 @@ CenterWindow::CenterWindow(QWidget *parent) : QWidget(parent)
 void CenterWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    int radius = 21;
+    int radius = 12;
     QRect _rect = rect().adjusted(-1, -1, 1, 1);
 
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -27,8 +27,8 @@ void CenterWindow::paintEvent(QPaintEvent *event)
     _rect.setWidth(btn_w);
 
     if (_y1 * _y2 > 0) {
-        QRect r1(0, 0, _rect.width(), _y1);
-        QRect r2(0, _y2, _rect.width(), _rect.height() - _y2);
+        QRect r1(_rect.x(), _rect.y(), _rect.width(), _y1 + 1);
+        QRect r2(_rect.x(), _y2, _rect.width(), _rect.height() - _y2);
 
         QPainterPath path1;
         path1.moveTo(r1.topLeft());

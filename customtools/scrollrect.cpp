@@ -18,7 +18,7 @@ void ScrollRect::paintEvent(QPaintEvent* event)
     painter.save();
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
-    painter.setBrush(_themeMode == ElaThemeType::Dark ?QColor(0xFF, 0xFF, 0xFF, 60) : QColor(0, 0, 0, 18));
+    painter.setBrush(_themeMode == ElaThemeType::Dark ? QColor(0xFF, 0xFF, 0xFF, 60) : QColor(0, 0, 0, 12));
     QRect foregroundRect(1, 1, width() - 2, height() - 2);
     painter.drawRoundedRect(foregroundRect, _pBorderRadius, _pBorderRadius);
     painter.restore();

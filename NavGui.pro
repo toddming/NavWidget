@@ -24,6 +24,7 @@ SOURCES += \
     widgettools/DeveloperComponents/ElaMenuStyle.cpp \
     widgettools/DeveloperComponents/ElaScrollBarStyle.cpp \
     widgettools/ElaMenu.cpp \
+    widgettools/ElaPushButton.cpp \
     widgettools/ElaScrollArea.cpp \
     widgettools/ElaScrollBar.cpp \
     widgettools/ElaText.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
     widgettools/ElaToggleButton.cpp \
     widgettools/ElaToggleSwitch.cpp \
     widgettools/private/ElaMenuPrivate.cpp \
+    widgettools/private/ElaPushButtonPrivate.cpp \
     widgettools/private/ElaScrollAreaPrivate.cpp \
     widgettools/private/ElaScrollBarPrivate.cpp \
     widgettools/private/ElaTextPrivate.cpp \
@@ -53,6 +55,7 @@ HEADERS += \
     widgettools/DeveloperComponents/ElaScrollBarStyle.h \
     widgettools/include/Def.h \
     widgettools/include/ElaMenu.h \
+    widgettools/include/ElaPushButton.h \
     widgettools/include/ElaScrollArea.h \
     widgettools/include/ElaScrollBar.h \
     widgettools/include/ElaText.h \
@@ -62,6 +65,7 @@ HEADERS += \
     widgettools/include/singleton.h \
     widgettools/include/stdafx.h \
     widgettools/private/ElaMenuPrivate.h \
+    widgettools/private/ElaPushButtonPrivate.h \
     widgettools/private/ElaScrollAreaPrivate.h \
     widgettools/private/ElaScrollBarPrivate.h \
     widgettools/private/ElaTextPrivate.h \

@@ -141,9 +141,9 @@ void MainWindow::installWindowAgent() {
     setMenuWidget(windowBar);
 
     connect(windowBar, &QWK::WindowBar::pinRequested, this, [this, pinButton](bool pin){
-        if (isHidden() || isMinimized() || isMaximized() || isFullScreen()) {
-            return;
-        }
+        // if (isHidden() || isMinimized() || isMaximized() || isFullScreen()) {
+        //     return;
+        // }
         // setWindowFlag(Qt::WindowStaysOnTopHint, pin);
         // show();
         loadStyleSheet(!pin ? ElaThemeType::Dark : ElaThemeType::Light);
