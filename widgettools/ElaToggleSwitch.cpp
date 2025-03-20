@@ -14,7 +14,7 @@ ElaToggleSwitch::ElaToggleSwitch(QWidget* parent)
     d->q_ptr = this;
     setObjectName("ElaToggleSwitch");
     setMouseTracking(true);
-    setFixedSize(44, 22);
+    setFixedSize(34, 20);
     d->_circleCenterX = -1;
     d->_isToggled = false;
     d->_themeMode = eTheme->getThemeMode();
@@ -146,9 +146,11 @@ void ElaToggleSwitch::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+
     // 背景绘制
-    painter.setPen(d->_isToggled ? QPen(ElaThemeColor(d->_themeMode, BasicBorder), 1.5) : QPen(ElaThemeColor(d->_themeMode, BasicBorderDeep), 1.5));
-    painter.setBrush(isEnabled() ? d->_isToggled ? ElaThemeColor(d->_themeMode, PrimaryNormal) : (underMouse() ? ElaThemeColor(d->_themeMode, BasicHover) : ElaThemeColor(d->_themeMode, BasicBase)) : ElaThemeColor(d->_themeMode, BasicDisable));
+    painter.setPen(Qt::NoPen);
+    //painter.setPen(d->_isToggled ? QPen(ElaThemeColor(d->_themeMode, BasicBorder), 1.5) : QPen(ElaThemeColor(d->_themeMode, BasicBorderDeep), 1.5));
+    painter.setBrush(isEnabled() ? d->_isToggled ? ElaThemeColor(d->_themeMode, PrimaryNormal) : (underMouse() ? ElaThemeColor(d->_themeMode, PrimaryNormal) : ElaThemeColor(d->_themeMode, PrimaryNormal)) : ElaThemeColor(d->_themeMode, BasicDisable));
     QPainterPath path;
     path.moveTo(width() - height() - d->_margin, height() - d->_margin);
     path.arcTo(QRectF(QPointF(width() - height() - d->_margin, d->_margin), QSize(height() - d->_margin * 2, height() - d->_margin * 2)), -90, 180);

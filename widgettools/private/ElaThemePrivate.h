@@ -17,7 +17,7 @@ public:
     ~ElaThemePrivate();
 
 private:
-    ElaThemeType::ThemeMode _themeMode{ElaThemeType::Light};
+    ElaThemeType::ThemeMode _themeMode{ElaThemeType::Dark};
     QColor _lightThemeColorList[40];
     QColor _darkThemeColorList[40];
     void _initThemeColor();

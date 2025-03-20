@@ -16,12 +16,12 @@ void ElaThemePrivate::_initThemeColor()
     _darkThemeColorList[ElaThemeType::ScrollBarHandle] = QColor(0x9F, 0x9F, 0x9F);
 
     //ElaToggleSwitch
-    _lightThemeColorList[ElaThemeType::ToggleSwitchNoToggledCenter] = QColor(0x5A, 0x5A, 0x5A);
-    _darkThemeColorList[ElaThemeType::ToggleSwitchNoToggledCenter] = QColor(0xD0, 0xD0, 0xD0);
+    _lightThemeColorList[ElaThemeType::ToggleSwitchNoToggledCenter] = QColor(212, 69, 69);
+    _darkThemeColorList[ElaThemeType::ToggleSwitchNoToggledCenter] = QColor(212, 69, 69);
 
     // 主题颜色
-    _lightThemeColorList[ElaThemeType::PrimaryNormal] = QColor(0x00, 0x67, 0xC0);
-    _darkThemeColorList[ElaThemeType::PrimaryNormal] = QColor(0x4C, 0xC2, 0xFF);
+    _lightThemeColorList[ElaThemeType::PrimaryNormal] = QColor(199, 191, 191);
+    _darkThemeColorList[ElaThemeType::PrimaryNormal] = QColor(65, 60, 60);
     _lightThemeColorList[ElaThemeType::PrimaryHover] = QColor(0x19, 0x75, 0xC5);
     _darkThemeColorList[ElaThemeType::PrimaryHover] = QColor(0x47, 0xB1, 0xE8);
     _lightThemeColorList[ElaThemeType::PrimaryPress] = QColor(0x31, 0x83, 0xCA);
@@ -53,8 +53,8 @@ void ElaThemePrivate::_initThemeColor()
     // 基础颜色
     _lightThemeColorList[ElaThemeType::BasicText] = Qt::black;
     _darkThemeColorList[ElaThemeType::BasicText] = Qt::white;
-    _lightThemeColorList[ElaThemeType::BasicTextInvert] = Qt::white;
-    _darkThemeColorList[ElaThemeType::BasicTextInvert] = Qt::black;
+    _lightThemeColorList[ElaThemeType::BasicTextInvert] = QColor(19, 175, 66);
+    _darkThemeColorList[ElaThemeType::BasicTextInvert] = QColor(19, 175, 66);
     _lightThemeColorList[ElaThemeType::BasicDetailsText] = QColor(0x87, 0x87, 0x87);
     _darkThemeColorList[ElaThemeType::BasicDetailsText] = QColor(0xAD, 0xAD, 0xB0);
     _lightThemeColorList[ElaThemeType::BasicTextNoFocus] = QColor(0x86, 0x86, 0x8A);

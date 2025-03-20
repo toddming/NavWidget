@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("");
 
     resize(800, 600);
+
+    //connect(eTheme, &ElaTheme::themeModeChanged, this, &MainWindow::loadStyleSheet);
 }
 
 MainWindow::~MainWindow()
@@ -76,13 +78,6 @@ bool MainWindow::event(QEvent *event) {
         }
         break;
     }
-
-    case QEvent::Resize: {
-        if (navBar != nullptr) {
-            navBar->handleResize();
-        }
-    }
-        break;
 
     default:
         break;
@@ -149,8 +144,10 @@ void MainWindow::installWindowAgent() {
         if (isHidden() || isMinimized() || isMaximized() || isFullScreen()) {
             return;
         }
-        setWindowFlag(Qt::WindowStaysOnTopHint, pin);
-        show();
+        // setWindowFlag(Qt::WindowStaysOnTopHint, pin);
+        // show();
+        loadStyleSheet(!pin ? ElaThemeType::Dark : ElaThemeType::Light);
+        eTheme->setThemeMode(!pin ? ElaThemeType::Dark : ElaThemeType::Light);
         pinButton->setChecked(pin);
     });
     connect(windowBar, &QWK::WindowBar::minimizeRequested, this, &QWidget::showMinimized);
@@ -180,33 +177,12 @@ void MainWindow::loadStyleSheet(ElaThemeType::ThemeMode theme) {
 
 void MainWindow::initUI()
 {
-    QWidget *w = new QWidget(this);
-    setCentralWidget(w);
+    CenterWindow *window = new CenterWindow(this);
+    QStringList list = {"主页", "配置", "代理", "日志", "连接", "设置", "关于"};
 
-    stackedWidget = new QStackedWidget(w);
+    foreach (const QString &str, list) {
+        window->addPage(str, new P_Home(window));
+    }
 
-    QHBoxLayout *lay = new QHBoxLayout(w);
-    lay->setContentsMargins(QMargins(0, 0, 0, 0));
-    lay->setSpacing(0);
-    navBar = new NavBar(this);
-    navBar->setFixedWidth(120);
-    navBar->initNavBar(NavLeft, {"主页", "代理", "配置", "日志", "连接", "设置", "关于"});
-    lay->addWidget(navBar);
-    lay->addWidget(stackedWidget);
-
-    QWidget *widget_1 = new QWidget(w);
-    stackedWidget->addWidget(widget_1);
-
-    ElaToggleSwitch *_switch = new ElaToggleSwitch(widget_1);
-
-    connect(_switch, &ElaToggleSwitch::toggled, this, [=](bool checked){
-        loadStyleSheet(checked ? ElaThemeType::Dark : ElaThemeType::Light);
-        eTheme->setThemeMode(checked ? ElaThemeType::Dark : ElaThemeType::Light);
-    });
-
-    QHBoxLayout *h_lay = new QHBoxLayout(widget_1);
-    h_lay->addStretch();
-    h_lay->addWidget(new ElaText("深色模式", 13, widget_1));
-    h_lay->addWidget(_switch);
-    h_lay->addStretch();
+    setCentralWidget(window);
 }

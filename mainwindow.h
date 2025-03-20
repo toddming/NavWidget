@@ -11,17 +11,18 @@
 #include <QGuiApplication>
 #include <QStyle>
 #include <QDebug>
-#include <QHBoxLayout>
-#include <QStackedWidget>
 #include <QTimer>
 
 #include <QWKWidgets/widgetwindowagent.h>
 #include <widgetframe/windowbar.h>
 #include <widgetframe/windowbutton.h>
-#include "navbar.h"
+#include "centerwindow.h"
 #include "ElaToggleSwitch.h"
 #include "ElaText.h"
 #include "ElaTheme.h"
+
+#include "customtools/scrollwidget.h"
+#include "subpage/p_home.h"
 
 
 class MainWindow : public QMainWindow
@@ -43,8 +44,6 @@ private:
     void loadStyleSheet(ElaThemeType::ThemeMode theme);
 
     QWK::WidgetWindowAgent *windowAgent;
-
-    NavBar *navBar{nullptr};
 
     QStackedWidget *stackedWidget{nullptr};
 

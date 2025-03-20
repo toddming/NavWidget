@@ -19,5 +19,7 @@
         <file>window-bar/pin-fill_light.svg</file>
         <file>window-bar/restore_dark.svg</file>
         <file>window-bar/restore_light.svg</file>
+        <file>window-bar/dark_mode.svg</file>
+        <file>window-bar/light_mode.svg</file>
     </qresource>
 </RCC>
