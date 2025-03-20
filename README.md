@@ -1,1 +1,2 @@
-![这是一个示例图片](example/dark.png)
+![深色模式](example/dark.png)
+![浅色模式](example/light.png)
