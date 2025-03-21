@@ -14,17 +14,17 @@
 #include <QPainterPath>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QPropertyAnimation>
 #include <QDebug>
 
 #include "ElaTheme.h"
+#include "customtools/usercard.h"
 
 class CenterWindow : public QWidget
 {
     Q_OBJECT
 public:
     explicit CenterWindow(QWidget *parent = nullptr);
-
-    void handleResize();
 
     void addPage(const QString &name, QWidget *widget);
 
@@ -51,10 +51,14 @@ private:
 
     ElaThemeType::ThemeMode _themeMode;
 
-    int _y1{0};
-    int _y2{0};
+    UserCard *userCard{nullptr};
 
-    int btn_w{120};
+    int m_topy{0};
+    int m_toph{80};
+    int btn_w{150};
+    int btn_h{45};
+
+    void startTopyAnimation(int targetTopy);
 };
 
 #endif // CENTERWINDOW_H

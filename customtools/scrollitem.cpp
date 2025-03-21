@@ -1,6 +1,5 @@
 #include "scrollitem.h"
 
-#include <QDebug>
 
 ScrollItem::ScrollItem(QWidget* parent)
     : QWidget{parent}

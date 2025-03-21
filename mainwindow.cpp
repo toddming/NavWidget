@@ -178,7 +178,7 @@ void MainWindow::loadStyleSheet(ElaThemeType::ThemeMode theme) {
 void MainWindow::initUI()
 {
     CenterWindow *window = new CenterWindow(this);
-    QStringList list = {"主页", "配置", "代理", "日志", "连接", "设置", "关于"};
+    QStringList list = {"主页", "日志",  "设置", "关于"};
 
     foreach (const QString &str, list) {
         window->addPage(str, new P_Home(window));

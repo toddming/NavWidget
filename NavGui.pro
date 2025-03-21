@@ -16,6 +16,7 @@ SOURCES += \
     customtools/scrollitem.cpp \
     customtools/scrollrect.cpp \
     customtools/scrollwidget.cpp \
+    customtools/usercard.cpp \
     main.cpp \
     mainwindow.cpp \
     subpage/p_home.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     customtools/scrollitem.h \
     customtools/scrollrect.h \
     customtools/scrollwidget.h \
+    customtools/usercard.h \
     mainwindow.h \
     subpage/p_home.h \
     widgetframe/windowbar.h \
@@ -73,7 +75,6 @@ HEADERS += \
     widgettools/private/ElaToggleButtonPrivate.h \
     widgettools/private/ElaToggleSwitchPrivate.h
 
-FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -82,3 +83,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources/shared.qrc
+
+RC_ICONS = logo.ico

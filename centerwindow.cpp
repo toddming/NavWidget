@@ -3,6 +3,8 @@
 
 CenterWindow::CenterWindow(QWidget *parent) : QWidget(parent)
 {
+    setProperty("topy", 0);
+
     buttonGroup = new QButtonGroup(this);
     buttonGroup->setExclusive(true);
     connect(buttonGroup, &QButtonGroup::buttonClicked,
@@ -26,14 +28,17 @@ void CenterWindow::paintEvent(QPaintEvent *event)
 
     _rect.setWidth(btn_w);
 
+    int _y1 = m_topy;
+    int _y2 = m_topy + btn_h;
+
     if (_y1 * _y2 > 0) {
-        QRect r1(_rect.x(), _rect.y(), _rect.width(), _y1 + 1);
+        QRect r1(_rect.x(), 0, _rect.width(), _y1);
         QRect r2(_rect.x(), _y2, _rect.width(), _rect.height() - _y2);
 
         QPainterPath path1;
         path1.moveTo(r1.topLeft());
         path1.lineTo(r1.topRight());
-        if (r1.bottom() < 85) {
+        if (r1.bottom() < m_toph + 2) {
             path1.lineTo(r1.bottomRight());
         } else {
             path1.lineTo(r1.bottomRight() - QPointF(0, radius));
@@ -68,42 +73,44 @@ void CenterWindow::paintEvent(QPaintEvent *event)
     QPen pen(color);
     pen.setWidthF(1);
     painter.setPen(pen);
-    painter.drawLine(_rect.x(), 80, rect().right(), 80);
+    painter.drawLine(_rect.x(), m_toph, rect().right(), m_toph);
 
     QWidget::paintEvent(event);
-}
-
-void CenterWindow::handleResize()
-{
-    if (checkedButton != nullptr) {
-        _y1 = checkedButton->pos().y();
-        _y2 = _y1 + checkedButton->height();
-        update();
-    }
 }
 
 void CenterWindow::on_btnGroup_clicked(QAbstractButton *btn)
 {
     checkedButton = btn;
     if (checkedButton != nullptr) {
-        _y1 = checkedButton->pos().y();
-        _y2 = _y1 + checkedButton->height();
-        update();
+        startTopyAnimation(checkedButton->pos().y());
         stackedWidget->setCurrentIndex(buttonGroup->buttons().indexOf(btn));
     }
 }
+
+void CenterWindow::startTopyAnimation(int targetTopy) {
+    QPropertyAnimation* animation = new QPropertyAnimation(this, "topy");
+    connect(animation, &QPropertyAnimation::valueChanged, this, [=](const QVariant& value) {
+        m_topy = value.toInt();
+        update();
+    });
+    animation->setDuration(100);
+    animation->setStartValue(m_topy);
+    animation->setEndValue(targetTopy);
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
 
 void CenterWindow::changeTheme(ElaThemeType::ThemeMode theme) {
     _themeMode = theme;
     if (theme == ElaThemeType::Dark) {
         cover_color = QColor(255, 255, 255, 30);
         QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font: 12pt \"Microsoft YaHei\";}"
-                       "QPushButton[btn-type=nav-button]:checked{color:white;}";
+                      "QPushButton[btn-type=nav-button]:checked{color:white;}";
         setStyleSheet(qss);
     } else {
         cover_color = QColor(0, 0, 0, 10);
         QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font: 12pt \"Microsoft YaHei\";}"
-                       "QPushButton[btn-type=nav-button]:checked{color:black;}";
+                      "QPushButton[btn-type=nav-button]:checked{color:black;}";
         setStyleSheet(qss);
     }
 }
@@ -113,9 +120,9 @@ void CenterWindow::addPage(const QString &name, QWidget *widget)
     if (btn_lay == nullptr) {
         btn_lay = new QVBoxLayout;
 
-        QLabel *label = new QLabel(this);
-        label->setFixedHeight(81);
-        btn_lay->addWidget(label);
+        userCard = new UserCard(this);
+        userCard->setFixedHeight(m_toph + 1);
+        btn_lay->addWidget(userCard);
         btn_lay->addStretch();
         stackedWidget = new QStackedWidget(this);
         QHBoxLayout *lay = new QHBoxLayout(this);
@@ -126,9 +133,13 @@ void CenterWindow::addPage(const QString &name, QWidget *widget)
     }
 
     QPushButton *btn = new QPushButton(name, this);
+
+    QCursor handCursor(Qt::PointingHandCursor);
+    btn->setCursor(handCursor);
+
     btn->setProperty("btn-type", "nav-button");
     btn->setCheckable(true);
-    btn->setFixedSize(btn_w, 45);
+    btn->setFixedSize(btn_w, btn_h);
     btn_lay->insertWidget(btn_lay->count() - 1, btn);
     buttonGroup->addButton(btn, stackedWidget->addWidget(widget));
 
@@ -139,8 +150,7 @@ bool CenterWindow::event(QEvent *event) {
     switch (event->type()) {
         case QEvent::Resize:
         if (checkedButton != nullptr) {
-            _y1 = checkedButton->pos().y();
-            _y2 = _y1 + checkedButton->height();
+            m_topy = checkedButton->pos().y();
             update();
         }
         break;

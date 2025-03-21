@@ -21,5 +21,6 @@
         <file>window-bar/restore_light.svg</file>
         <file>window-bar/dark_mode.svg</file>
         <file>window-bar/light_mode.svg</file>
+        <file>app/head.png</file>
     </qresource>
 </RCC>
