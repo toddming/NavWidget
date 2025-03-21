@@ -11,7 +11,7 @@ UserCard::UserCard(QWidget* parent)
     _pCardPixmapSize.setWidth(46);
     _pCardPixmapSize.setHeight(46);
     _pCardPixmap.load(":/app/head.png");
-    _pCardPixmap = _pCardPixmap.scaled(_pCardPixmapSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    _pCardPixmap = _pCardPixmap.scaled(_pCardPixmapSize * 2, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     _themeMode = eTheme->getThemeMode();
     connect(eTheme, &ElaTheme::themeModeChanged, this, [=](ElaThemeType::ThemeMode themeMode) {

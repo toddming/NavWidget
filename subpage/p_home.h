@@ -8,6 +8,7 @@
 #include "customtools/scrollrect.h"
 #include "customtools/scrollitem.h"
 #include "customtools/scrollwidget.h"
+#include "customtools/checkgroup.h"
 
 class P_Home : public ScrollWidget
 {
