@@ -9,8 +9,6 @@ CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
 
     _pBorderRadius = 7;
 
-    m_rect = QRect(0, 0, 0, 0);
-
     buttonGroup = new QButtonGroup(this);
     buttonGroup->setExclusive(true);
     connect(buttonGroup, &QButtonGroup::buttonClicked,
@@ -37,15 +35,16 @@ CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
     connect(eTheme, &ElaTheme::themeModeChanged, this, [=](ElaThemeType::ThemeMode themeMode) {
         _themeMode = themeMode;
     });
-
+    m_rect = QRect(0, 0, 0, height());
 }
 
 void CheckGroup::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
+    painter.save();
 
-    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
+    painter.setRenderHints(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
 
     QList<QAbstractButton*> btns = buttonGroup->buttons();
@@ -55,13 +54,13 @@ void CheckGroup::paintEvent(QPaintEvent* event)
         _rect = _rect.adjusted(0, 0, 1, 1);
         bool _first = i == 0;
         bool _last = i == btns.count() - 1;
+        bool _checked = btn == checkedButton;
         QColor _color;
         if (_themeMode == ElaThemeType::Dark) {
-            _color = i % 2 == 0 ? QColor("#332F2F") : QColor("#413C3C");
+            _color = _checked ? Qt::transparent : i % 2 == 0 ? QColor("#332F2F") : QColor("#413C3C");
         } else {
-            _color =  i % 2 == 0 ? QColor("#BDB3B3") : QColor("#C7BFBF");
+            _color = _checked ? Qt::transparent :   i % 2 == 0 ? QColor("#BDB3B3") : QColor("#C7BFBF");
         }
-        painter.save();
 
         if (_first) {
             QPainterPath path;
@@ -91,49 +90,46 @@ void CheckGroup::paintEvent(QPaintEvent* event)
             path.lineTo(_rect.topLeft());
             path.closeSubpath();
             painter.fillPath(path, _color);
+        }  
+    }
+    painter.restore();
+    if (checkedButton != nullptr) {
+        QColor _color = QColor("#179BBB");
+        bool _first = btns.indexOf(checkedButton) == 0;
+        bool _last = btns.indexOf(checkedButton) == btns.count() - 1;
+        painter.save();
+        if (_first) {
+            QPainterPath path;
+            path.moveTo(m_rect.topRight());
+            path.lineTo(m_rect.bottomRight());
+            path.lineTo(m_rect.x() + _pBorderRadius, m_rect.bottom());
+            path.quadTo(m_rect.bottomLeft(), m_rect.bottomLeft() - QPointF(0, _pBorderRadius));
+            path.lineTo(m_rect.topLeft() + QPointF(0, _pBorderRadius));
+            path.quadTo(m_rect.topLeft(), m_rect.topLeft() + QPointF(_pBorderRadius, 0));
+            path.closeSubpath();
+            painter.fillPath(path, _color);
+        } else if (_last) {
+            QPainterPath path;
+            path.moveTo(m_rect.topLeft());
+            path.lineTo(m_rect.bottomLeft());
+            path.lineTo(m_rect.bottomRight() - QPointF(_pBorderRadius, 0));
+            path.quadTo(m_rect.bottomRight(), m_rect.bottomRight() + QPointF(0, -_pBorderRadius));
+            path.lineTo(m_rect.topRight() + QPointF(0, _pBorderRadius));
+            path.quadTo(m_rect.topRight(), m_rect.topRight() - QPointF(_pBorderRadius, 0));
+            path.closeSubpath();
+            painter.fillPath(path, _color);
+        } else {
+            QPainterPath path;
+            path.moveTo(m_rect.topRight());
+            path.lineTo(m_rect.bottomRight());
+            path.lineTo(m_rect.bottomLeft());
+            path.lineTo(m_rect.topLeft());
+            path.closeSubpath();
+            painter.fillPath(path, _color);
         }
         painter.restore();
-
-        if (checkedButton != nullptr) {
-            _color = QColor("#179BBB");
-            painter.save();
-
-            if (_first) {
-                QPainterPath path;
-                path.moveTo(m_rect.topRight());
-                path.lineTo(m_rect.bottomRight());
-                path.lineTo(m_rect.x() + _pBorderRadius, m_rect.bottom());
-                path.quadTo(m_rect.bottomLeft(), m_rect.bottomLeft() - QPointF(0, _pBorderRadius));
-                path.lineTo(m_rect.topLeft() + QPointF(0, _pBorderRadius));
-                path.quadTo(m_rect.topLeft(), m_rect.topLeft() + QPointF(_pBorderRadius, 0));
-                path.closeSubpath();
-                painter.fillPath(path, _color);
-            } else if (_last) {
-                QPainterPath path;
-                path.moveTo(m_rect.topLeft());
-                path.lineTo(m_rect.bottomLeft());
-                path.lineTo(m_rect.bottomRight() - QPointF(_pBorderRadius, 0));
-                path.quadTo(m_rect.bottomRight(), m_rect.bottomRight() + QPointF(0, -_pBorderRadius));
-                path.lineTo(m_rect.topRight() + QPointF(0, _pBorderRadius));
-                path.quadTo(m_rect.topRight(), m_rect.topRight() - QPointF(_pBorderRadius, 0));
-                path.closeSubpath();
-                painter.fillPath(path, _color);
-            } else {
-                QPainterPath path;
-                path.moveTo(m_rect.topRight());
-                path.lineTo(m_rect.bottomRight());
-                path.lineTo(m_rect.bottomLeft());
-                path.lineTo(m_rect.topLeft());
-                path.closeSubpath();
-                painter.fillPath(path, _color);
-            }
-            painter.restore();
-
-        }
     }
-
     QWidget::paintEvent(event);
-
 }
 
 void CheckGroup::on_btnGroup_clicked(QAbstractButton *btn)
@@ -141,9 +137,8 @@ void CheckGroup::on_btnGroup_clicked(QAbstractButton *btn)
     checkedButton = btn;
 
     QRect _rect(btn->pos().x(), btn->pos().y(), btn->width(), btn->height());
-    m_rect = _rect;
-    update();
-    //startRectAnimation(_rect.adjusted(0, 0, 1, 1));
+
+    startRectAnimation(_rect.adjusted(0, 0, 1, 1));
 }
 
 QRect CheckGroup::myRect() const {
@@ -163,7 +158,7 @@ void CheckGroup::startRectAnimation(QRect targetRect) {
         m_rect = value.toRect();
         update();
     });
-    animation->setDuration(500);
+    animation->setDuration(100);
     animation->setStartValue(m_rect);
     animation->setEndValue(targetRect);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
