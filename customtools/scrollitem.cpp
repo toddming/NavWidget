@@ -32,7 +32,7 @@ bool ScrollItem::event(QEvent* event)
     {
     case QEvent::Enter:
     {
-        startAlphaAnimation(_themeMode == ElaThemeType::Dark ? 100 : 50);
+        startAlphaAnimation(_themeMode == ElaThemeType::Dark ? 80 : 30);
         break;
     }
     case QEvent::Leave:

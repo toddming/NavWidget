@@ -73,7 +73,7 @@ void CenterWindow::paintEvent(QPaintEvent *event)
     QPen pen(color);
     pen.setWidthF(1);
     painter.setPen(pen);
-    painter.drawLine(_rect.x(), m_toph, rect().right(), m_toph);
+    painter.drawLine(0, m_toph, rect().right(), m_toph);
 
     QWidget::paintEvent(event);
 }

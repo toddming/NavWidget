@@ -20,7 +20,7 @@ void ElaThemePrivate::_initThemeColor()
     _darkThemeColorList[ElaThemeType::ToggleSwitchNoToggledCenter] = QColor(212, 69, 69);
 
     // 主题颜色
-    _lightThemeColorList[ElaThemeType::PrimaryNormal] = QColor(199, 191, 191);
+    _lightThemeColorList[ElaThemeType::PrimaryNormal] = QColor(201, 193, 193);
     _darkThemeColorList[ElaThemeType::PrimaryNormal] = QColor(65, 60, 60);
     _lightThemeColorList[ElaThemeType::PrimaryHover] = QColor(0x19, 0x75, 0xC5);
     _darkThemeColorList[ElaThemeType::PrimaryHover] = QColor(0x47, 0xB1, 0xE8);

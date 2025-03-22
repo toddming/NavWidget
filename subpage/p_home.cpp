@@ -18,8 +18,8 @@ P_Home::P_Home(QWidget* parent)
 
     QStringList rect_list = {"安全", "常规", "外观", "系统代理"};
     QStringList item_list = {"向系统通知栏发送相关消息", "开启时默认缩小至任务栏", "随机占用端口", "随机混合端扣",
-                       "轻量模式", "检查更新", "新版本时提醒", "遵循系统主题", "使用系统表情符号",
-                       "隐藏托盘图标", "透明", "指定协议", "静态主机", "悬浮窗", "显示筛选过滤器"};
+                             "轻量模式", "检查更新", "新版本时提醒", "遵循系统主题", "使用系统表情符号",
+                             "隐藏托盘图标", "透明", "指定协议", "静态主机", "悬浮窗", "显示筛选过滤器"};
 
     for (int i=0; i < 4; i++) {
         ElaText *title = new ElaText(rect_list.at(i), 17, centerWidget);
@@ -38,7 +38,11 @@ P_Home::P_Home(QWidget* parent)
             h_lay->setContentsMargins(8,8,8,8);
             ElaText *text = new ElaText(item_list.at(i*4+n), 15, item);
             h_lay->addWidget(text);
-            h_lay->addWidget(new ElaToggleSwitch(item));
+            if (i == 0) {
+                h_lay->addWidget(new CheckGroup(QStringList({"明亮", "黑暗", "赛博朋克", "国庆中秋"}), item));
+            } else {
+                h_lay->addWidget(new ElaToggleSwitch(item));
+            }
         }
     }
     lay->addStretch();
