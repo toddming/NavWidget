@@ -14,6 +14,7 @@ INCLUDEPATH += widgettools/include
 SOURCES += \
     centerwindow.cpp \
     customtools/checkgroup.cpp \
+    customtools/hlineedit.cpp \
     customtools/scrollitem.cpp \
     customtools/scrollrect.cpp \
     customtools/scrollwidget.cpp \
@@ -45,6 +46,7 @@ SOURCES += \
 HEADERS += \
     centerwindow.h \
     customtools/checkgroup.h \
+    customtools/hlineedit.h \
     customtools/scrollitem.h \
     customtools/scrollrect.h \
     customtools/scrollwidget.h \

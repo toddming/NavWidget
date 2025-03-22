@@ -40,6 +40,8 @@ P_Home::P_Home(QWidget* parent)
             h_lay->addWidget(text);
             if (i == 0) {
                 h_lay->addWidget(new CheckGroup(QStringList({"明亮", "黑暗", "赛博朋克", "国庆中秋"}), item));
+            } else if (i == 1) {
+                h_lay->addWidget(new HLineEdit(item));
             } else {
                 h_lay->addWidget(new ElaToggleSwitch(item));
             }

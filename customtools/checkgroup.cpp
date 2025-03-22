@@ -42,7 +42,6 @@ void CheckGroup::paintEvent(QPaintEvent* event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
-    painter.save();
 
     painter.setRenderHints(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
@@ -55,11 +54,13 @@ void CheckGroup::paintEvent(QPaintEvent* event)
         bool _first = i == 0;
         bool _last = i == btns.count() - 1;
         bool _checked = btn == checkedButton;
+        if (_checked && _rect == m_rect)
+            continue;
         QColor _color;
         if (_themeMode == ElaThemeType::Dark) {
-            _color = _checked ? Qt::transparent : i % 2 == 0 ? QColor("#332F2F") : QColor("#413C3C");
+            _color = i % 2 == 0 ? QColor("#332F2F") : QColor("#413C3C");
         } else {
-            _color = _checked ? Qt::transparent :   i % 2 == 0 ? QColor("#BDB3B3") : QColor("#C7BFBF");
+            _color = i % 2 == 0 ? QColor("#BDB3B3") : QColor("#C7BFBF");
         }
 
         if (_first) {
@@ -90,14 +91,14 @@ void CheckGroup::paintEvent(QPaintEvent* event)
             path.lineTo(_rect.topLeft());
             path.closeSubpath();
             painter.fillPath(path, _color);
-        }  
+        }
     }
-    painter.restore();
+
     if (checkedButton != nullptr) {
         QColor _color = QColor("#179BBB");
         bool _first = btns.indexOf(checkedButton) == 0;
         bool _last = btns.indexOf(checkedButton) == btns.count() - 1;
-        painter.save();
+
         if (_first) {
             QPainterPath path;
             path.moveTo(m_rect.topRight());
@@ -127,7 +128,6 @@ void CheckGroup::paintEvent(QPaintEvent* event)
             path.closeSubpath();
             painter.fillPath(path, _color);
         }
-        painter.restore();
     }
     QWidget::paintEvent(event);
 }
@@ -148,7 +148,7 @@ QRect CheckGroup::myRect() const {
 void CheckGroup::setMyRect(const QRect &value) {
     if (m_rect != value) {
         m_rect = value;
-        emit Q_EMIT myRectChanged();
+        emit myRectChanged();
     }
 }
 
