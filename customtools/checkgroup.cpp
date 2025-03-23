@@ -28,8 +28,8 @@ CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
     }
 
     _themeMode = eTheme->getThemeMode();
-    setStyleSheet(QString("QPushButton{background-color:transparent;border-style:none;color:%1;font: 10pt \"Microsoft YaHei\";"
-                          "padding-top: 4px; padding-right: 8px; padding-bottom: 5px; padding-left: 8px;}")
+    setStyleSheet(QString("QPushButton{background-color:transparent;border-style:none;color:%1; font-size: 12px;"
+                          "padding-top: 4px; padding-right: 8px; padding-bottom: 4px; padding-left: 8px;}")
                       .arg("white"));
 
     connect(eTheme, &ElaTheme::themeModeChanged, this, [=](ElaThemeType::ThemeMode themeMode) {

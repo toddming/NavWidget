@@ -16,30 +16,51 @@ void HLineEdit::onThemeChanged(ElaThemeType::ThemeMode themeMode)
 {
     _themeMode = themeMode;
     if (themeMode == ElaThemeType::Light) {
-        QPalette palette;
-        palette.setColor(QPalette::Text, Qt::black);
-        palette.setColor(QPalette::PlaceholderText, QColor(0x00, 0x00, 0x00, 128));
-        setPalette(palette);
+        QString styleSheet = "QLineEdit {"
+                             "    background-color: rgb(255, 255, 255);"
+                             "    border: none;"
+                             "    border-bottom: none;"
+                             "    border-radius: 3px;"
+                             "    padding: 3px 10px;"
+                             "    color: black;"
+                             "    font-size: 14px;"
+                             "    selection-color: white;"
+                             "}"
+                             "QLineEdit:hover {"
+                             "    background: rgb(240, 240, 240);"
+                             "}"
+                             "QLineEdit:focus {"
+                             "    background: rgb(255, 255, 255);"
+                             "}"
+                             "QLineEdit:disabled {"
+                             "    background-color: rgb(240, 240, 240);"
+                             "}"
+                             "QLineEdit::placeholder {"
+                             "    color: gray;"
+                             "}";
+        setStyleSheet(styleSheet);
     } else {
         QString styleSheet = "QLineEdit {"
                              "    background-color: rgb(55, 55, 57);"
                              "    border: none;"
-                             "    border-bottom: 1px solid rgba(255, 255, 255, 0.5442);"
-                             "    border-radius: 5px;"
-                             "    padding: 5px 10px;"
+                             "    border-bottom: none;"
+                             "    border-radius: 3px;"
+                             "    padding: 3px 10px;"
                              "    color: white;"
-                             "    selection-color: black;"
+                             "    font-size: 14px;"
+                             "    selection-color: white;"
                              "}"
                              "QLineEdit:hover {"
-                             "    background: rgba(255, 255, 255, 0.0837);"
+                             "    background: rgb(64, 64, 66);"
                              "}"
                              "QLineEdit:focus {"
-                             "    background: rgb(31, 31, 31);"
+                             "    background: rgb(42, 42, 43);"
                              "}"
                              "QLineEdit:disabled {"
-                             "    color: rgba(255, 255, 255, 0.36);"
-                             "    background-color: rgba(255, 255, 255, 0.0419);"
-                             "    border: 1px solid rgba(255, 255, 255, 0.0698);"
+                             "    background-color: rgb(64, 64, 66);"
+                             "}"
+                             "QLineEdit::placeholder {"
+                             "    color: gray;"
                              "}";
         setStyleSheet(styleSheet);
     }

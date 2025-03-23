@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
@@ -12,11 +13,14 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    QFont font("Microsoft YaHei", -1, QFont::Normal);
-    font.setPixelSize(12);
-    font.setStyleStrategy(QFont::PreferAntialias);
-    font.setHintingPreference(QFont::PreferFullHinting);
-    app.setFont(font);
+    QFontDatabase::addApplicationFont("font/ElaAwesome.ttf");
+    int fontId = QFontDatabase::addApplicationFont("font/AlimamaFangYuanTiVF-Thin.ttf");
+    if(fontId >= 0)  {
+        QFont font("阿里妈妈方圆体 VF Medium", -1);
+        font.setPixelSize(12);
+        font.setHintingPreference(QFont::PreferFullHinting);
+        app.setFont(font);
+    }
 
     MainWindow w;
     w.show();

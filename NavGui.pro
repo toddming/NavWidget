@@ -15,6 +15,7 @@ SOURCES += \
     centerwindow.cpp \
     customtools/checkgroup.cpp \
     customtools/hlineedit.cpp \
+    customtools/htoolbutton.cpp \
     customtools/scrollitem.cpp \
     customtools/scrollrect.cpp \
     customtools/scrollwidget.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     centerwindow.h \
     customtools/checkgroup.h \
     customtools/hlineedit.h \
+    customtools/htoolbutton.h \
     customtools/scrollitem.h \
     customtools/scrollrect.h \
     customtools/scrollwidget.h \

@@ -104,12 +104,12 @@ void CenterWindow::changeTheme(ElaThemeType::ThemeMode theme) {
     _themeMode = theme;
     if (theme == ElaThemeType::Dark) {
         cover_color = QColor(255, 255, 255, 30);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font: 12pt \"Microsoft YaHei\";}"
+        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font-size: 18px;}"
                       "QPushButton[btn-type=nav-button]:checked{color:white;}";
         setStyleSheet(qss);
     } else {
         cover_color = QColor(0, 0, 0, 10);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font: 12pt \"Microsoft YaHei\";}"
+        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font-size: 18px;}"
                       "QPushButton[btn-type=nav-button]:checked{color:black;}";
         setStyleSheet(qss);
     }

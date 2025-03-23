@@ -39,9 +39,19 @@ P_Home::P_Home(QWidget* parent)
             ElaText *text = new ElaText(item_list.at(i*4+n), 15, item);
             h_lay->addWidget(text);
             if (i == 0) {
-                h_lay->addWidget(new CheckGroup(QStringList({"明亮", "黑暗", "赛博朋克", "国庆中秋"}), item));
+                if (n == 0) {
+                    h_lay->addWidget(new CheckGroup(QStringList({"HTTP", "PAC"}), item));
+                } else if (n == 1) {
+                    h_lay->addWidget(new CheckGroup(QStringList({"默认", "子菜单", "隐藏"}), item));
+                } else {
+                    h_lay->addWidget(new CheckGroup(QStringList({"明亮", "黑暗", "赛博朋克", "国庆中秋"}), item));
+                }
             } else if (i == 1) {
-                h_lay->addWidget(new HLineEdit(item));
+                HLineEdit *lineEdit = new HLineEdit(item);
+                lineEdit->setPlaceholderText("配置路径");
+                h_lay->addWidget(lineEdit);
+            } else if (i == 2) {
+                h_lay->addWidget(new HToolButton("打开 ▶", false, item));
             } else {
                 h_lay->addWidget(new ElaToggleSwitch(item));
             }
