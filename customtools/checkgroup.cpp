@@ -17,7 +17,7 @@ CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
 
     QHBoxLayout *lay = new QHBoxLayout(this);
     lay->setSpacing(0);
-    lay->setContentsMargins(0, 0, 0, 0);
+    lay->setContentsMargins(0, 2, 0, 2);
 
     for (int i=0; i < items.count(); i++) {
         QPushButton *btn = new QPushButton(items[i], this);
