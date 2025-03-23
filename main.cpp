@@ -14,13 +14,12 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QFontDatabase::addApplicationFont("font/ElaAwesome.ttf");
-    int fontId = QFontDatabase::addApplicationFont("font/AlimamaFangYuanTiVF-Thin.ttf");
-    if(fontId >= 0)  {
-        QFont font("阿里妈妈方圆体 VF Medium", -1);
-        font.setPixelSize(12);
-        font.setHintingPreference(QFont::PreferFullHinting);
-        app.setFont(font);
-    }
+
+    QFont font("Microsoft YaHei UI", 12);
+    font.setWeight(QFont::Medium);
+    font.setHintingPreference(QFont::PreferFullHinting);
+    font.setStyleStrategy(QFont::PreferAntialias);
+    app.setFont(font);
 
     MainWindow w;
     w.show();

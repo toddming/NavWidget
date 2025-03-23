@@ -22,6 +22,9 @@ protected:
 private:
     bool m_underline{false};
 
+    int m_pSize{10};
+
+
     ElaThemeType::ThemeMode _themeMode;
 
 };

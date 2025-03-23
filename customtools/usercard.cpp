@@ -58,11 +58,11 @@ void UserCard::paintEvent(QPaintEvent* event)
     painter.setFont(font);
     int textStartX = _pCardPixmapSize.width() + 20;
     int textWidth = _rect.width() - textStartX;
-    painter.drawText(QRect(textStartX, _pic_rect.y(), textWidth, _pic_rect.height() / 2), Qt::TextWordWrap | Qt::AlignBottom | Qt::AlignLeft, "Admin");
+    painter.drawText(QRect(textStartX, _pic_rect.y(), textWidth, _pic_rect.height() / 2 + 2), Qt::TextWordWrap | Qt::AlignBottom | Qt::AlignLeft, "Admin");
     font.setWeight(QFont::Normal);
-    font.setPixelSize(12);
+    font.setPixelSize(11);
     painter.setFont(font);
-    painter.drawText(QRect(textStartX, _pic_rect.y() + _pic_rect.height() / 2, textWidth, _pic_rect.height() / 2), Qt::TextWordWrap | Qt::AlignTop | Qt::AlignLeft, "本地账户");
+    painter.drawText(QRect(textStartX, _pic_rect.y() + _pic_rect.height() / 2 + 3, textWidth, _pic_rect.height() / 2), Qt::TextWordWrap | Qt::AlignTop | Qt::AlignLeft, "本地账户");
     painter.restore();
 }
 

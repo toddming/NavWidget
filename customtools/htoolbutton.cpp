@@ -33,16 +33,24 @@ void HToolButton::paintEvent(QPaintEvent* event)
     painter.setPen(_themeMode == ElaThemeType::Dark ? QColor("#D4D4D4") : QColor("#747D88"));
 
     QFont font = this->font();
-    font.setPointSize(10);
+    font.setPointSize(m_pSize);
     painter.setFont(font);
     QFontMetrics metrics(font);
-    QRect textRect = metrics.boundingRect(this->text());
 
+    QRect textRect = metrics.boundingRect(this->text());
     int x = (this->width() - textRect.width()) / 2;
     int y = (this->height() - textRect.height()) / 2;
     textRect.moveTo(x, y);
+    if (this->text().endsWith(" ▶")) {
+        QRect textRectA = metrics.boundingRect(this->text().remove(" ▶"));
+        painter.drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, text().remove(" ▶") + "  ");
 
-    painter.drawText(rect(), Qt::AlignCenter, text());
+        font.setPointSize(m_pSize + 1);
+        painter.setFont(font);
+        painter.drawText(QRectF(textRect.x() + textRectA.width() + 1, textRect.y(), textRect.width()-textRectA.width(), textRect.height()), Qt::AlignRight | Qt::AlignVCenter, " ▶");
+    } else {
+        painter.drawText(textRect, Qt::AlignCenter, text());
+    }
 
     if (m_underline) {
         QPen pen(ElaThemeColor(_themeMode, BasicText));

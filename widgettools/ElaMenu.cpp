@@ -149,7 +149,7 @@ void ElaMenu::showEvent(QShowEvent* event)
         update();
     });
     posAnimation->setEasingCurve(QEasingCurve::OutCubic);
-    posAnimation->setDuration(400);
+    posAnimation->setDuration(100);
     int targetPosY = height();
     if (targetPosY > 160)
     {

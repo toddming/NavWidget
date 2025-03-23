@@ -51,7 +51,7 @@ P_Home::P_Home(QWidget* parent)
                 lineEdit->setPlaceholderText("配置路径");
                 h_lay->addWidget(lineEdit);
             } else if (i == 2) {
-                h_lay->addWidget(new HToolButton("打开 ▶", false, item));
+                h_lay->addWidget(new HToolButton("编辑 ▶", false, item));
             } else {
                 h_lay->addWidget(new ElaToggleSwitch(item));
             }

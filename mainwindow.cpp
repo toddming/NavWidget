@@ -14,8 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("");
 
     resize(800, 600);
-
-    //connect(eTheme, &ElaTheme::themeModeChanged, this, &MainWindow::loadStyleSheet);
 }
 
 MainWindow::~MainWindow()
@@ -141,11 +139,6 @@ void MainWindow::installWindowAgent() {
     setMenuWidget(windowBar);
 
     connect(windowBar, &QWK::WindowBar::pinRequested, this, [this, pinButton](bool pin){
-        // if (isHidden() || isMinimized() || isMaximized() || isFullScreen()) {
-        //     return;
-        // }
-        // setWindowFlag(Qt::WindowStaysOnTopHint, pin);
-        // show();
         loadStyleSheet(!pin ? ElaThemeType::Dark : ElaThemeType::Light);
         eTheme->setThemeMode(!pin ? ElaThemeType::Dark : ElaThemeType::Light);
         pinButton->setChecked(pin);

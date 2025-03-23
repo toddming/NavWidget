@@ -5,6 +5,8 @@ HLineEdit::HLineEdit(QWidget *parent) : QLineEdit(parent)
 {
     setFixedWidth(120);
 
+    setContentsMargins(0,0,0,0);
+
     setAlignment(Qt::AlignCenter);
 
     onThemeChanged(eTheme->getThemeMode());
