@@ -8,7 +8,7 @@ HToolButton::HToolButton(const QString &text, bool underline, QWidget *parent) :
     m_underline = underline;
 
     setStyleSheet("background-color:transparent;border-style:none;"
-                  "padding-top: 1px; padding-right: 4px; padding-bottom: 1px; padding-left: 4px;");
+                  "padding-top: 1px; padding-right: 0px; padding-bottom: 1px; padding-left: 0px;");
 
     QCursor handCursor(Qt::PointingHandCursor);
     setCursor(handCursor);
