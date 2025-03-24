@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
     QFontDatabase::addApplicationFont("font/ElaAwesome.ttf");
 
     QFont font("Microsoft YaHei UI", 12);
-    font.setWeight(QFont::Medium);
-    font.setHintingPreference(QFont::PreferFullHinting);
+    font.setHintingPreference(QFont::PreferNoHinting);
     font.setStyleStrategy(QFont::PreferAntialias);
     app.setFont(font);
 

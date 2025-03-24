@@ -33,11 +33,12 @@ P_Home::P_Home(QWidget* parent)
         v_lay->setContentsMargins(6,6,6,6);
         for (int n=0; n < 3; n++) {
             ScrollItem *item = new ScrollItem(rect);
-            item->setFixedHeight(40);
+            item->setFixedHeight(36);
             v_lay->addWidget(item);
             QHBoxLayout *h_lay = new QHBoxLayout(item);
             h_lay->setContentsMargins(6,6,6,6);
             ElaText *text = new ElaText(item_list.at(i*4+n), 15, item);
+            //text->setTextStyle(ElaTextType::BodyStrong);
             h_lay->addWidget(text);
             if (i == 0) {
                 if (n == 0) {

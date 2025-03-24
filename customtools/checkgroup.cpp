@@ -5,7 +5,7 @@
 CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
     : QWidget{parent}
 {
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     _pBorderRadius = 7;
 
@@ -21,7 +21,7 @@ CheckGroup::CheckGroup(const QStringList &items, QWidget* parent)
 
     for (int i=0; i < items.count(); i++) {
         QPushButton *btn = new QPushButton(items[i], this);
-        btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         btn->setCheckable(true);
         buttonGroup->addButton(btn, i);
         lay->addWidget(btn);

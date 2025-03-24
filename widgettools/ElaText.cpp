@@ -102,8 +102,8 @@ void ElaText::setTextStyle(ElaTextType::TextStyle textStyle)
     }
     case ElaTextType::BodyStrong:
     {
-        textFont.setPixelSize(13);
-        textFont.setWeight(QFont::DemiBold);
+        textFont.setPixelSize(15);
+        textFont.setWeight(QFont::Bold);
         break;
     }
     case ElaTextType::Subtitle:
