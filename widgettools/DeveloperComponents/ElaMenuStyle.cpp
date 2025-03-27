@@ -61,12 +61,8 @@ void ElaMenuStyle::drawControl(ControlElement element, const QStyleOption* optio
             {
                 QRect separatorRect = mopt->rect;
                 painter->save();
-                //painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-                painter->setPen(Qt::NoPen);
-                //painter->setBrush(ElaThemeColor(_themeMode, BasicBaseLine));
-                painter->setBrush(Qt::red);
-                qDebug() << separatorRect << QRectF(separatorRect.x() + separatorRect.width() * 0.055, separatorRect.center().y(), separatorRect.width() - separatorRect.width() * 0.11, 1.5);
-                //painter->drawRoundedRect(QRectF(separatorRect.x() + separatorRect.width() * 0.055, separatorRect.center().y(), separatorRect.width() - separatorRect.width() * 0.11, 1.5), 1, 1);
+                painter->setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing | QPainter::TextAntialiasing);
+                painter->setPen(ElaThemeColor(_themeMode, BasicBaseLine));
 
                 QPointF _p1(separatorRect.x() + separatorRect.width() * 0.055, separatorRect.center().y());
                 QPointF _p2(_p1.x() + separatorRect.width() - separatorRect.width() * 0.11, _p1.y());

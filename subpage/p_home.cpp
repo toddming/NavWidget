@@ -33,7 +33,7 @@ P_Home::P_Home(QWidget* parent)
         v_lay->setContentsMargins(6,6,6,6);
         for (int n=0; n < 3; n++) {
             ScrollItem *item = new ScrollItem(rect);
-            item->setFixedHeight(36);
+            item->setFixedHeight(38);
             v_lay->addWidget(item);
             QHBoxLayout *h_lay = new QHBoxLayout(item);
             h_lay->setContentsMargins(6,6,6,6);
