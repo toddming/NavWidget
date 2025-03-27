@@ -149,8 +149,7 @@ void ElaToggleSwitch::paintEvent(QPaintEvent* event)
 
     // 背景绘制
     painter.setPen(Qt::NoPen);
-    //painter.setPen(d->_isToggled ? QPen(ElaThemeColor(d->_themeMode, BasicBorder), 1.5) : QPen(ElaThemeColor(d->_themeMode, BasicBorderDeep), 1.5));
-    painter.setBrush(isEnabled() ? d->_isToggled ? ElaThemeColor(d->_themeMode, PrimaryNormal) : (underMouse() ? ElaThemeColor(d->_themeMode, PrimaryNormal) : ElaThemeColor(d->_themeMode, PrimaryNormal)) : ElaThemeColor(d->_themeMode, BasicDisable));
+    painter.setBrush(isEnabled() ? ElaThemeColor(d->_themeMode, ToggleSwitchBackground) : ElaThemeColor(d->_themeMode, BasicDisable));
     QPainterPath path;
     path.moveTo(width() - height() - d->_margin, height() - d->_margin);
     path.arcTo(QRectF(QPointF(width() - height() - d->_margin, d->_margin), QSize(height() - d->_margin * 2, height() - d->_margin * 2)), -90, 180);

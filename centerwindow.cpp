@@ -80,10 +80,13 @@ void CenterWindow::paintEvent(QPaintEvent *event)
 
 void CenterWindow::on_btnGroup_clicked(QAbstractButton *btn)
 {
+    if (checkedButton == btn)
+        return;
     checkedButton = btn;
     if (checkedButton != nullptr) {
         startTopyAnimation(checkedButton->pos().y());
-        stackedWidget->setCurrentIndex(buttonGroup->buttons().indexOf(btn));
+        int nodeIndex = buttonGroup->buttons().indexOf(btn);
+        stackedWidget->setCurrentIndex(nodeIndex);
     }
 }
 
@@ -104,12 +107,12 @@ void CenterWindow::changeTheme(ElaThemeType::ThemeMode theme) {
     _themeMode = theme;
     if (theme == ElaThemeType::Dark) {
         cover_color = QColor(255, 255, 255, 30);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font-size: 18px;}"
+        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font-size: 17px;}"
                       "QPushButton[btn-type=nav-button]:checked{color:white;}";
         setStyleSheet(qss);
     } else {
         cover_color = QColor(0, 0, 0, 10);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font-size: 18px;}"
+        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font-size: 17px;}"
                       "QPushButton[btn-type=nav-button]:checked{color:black;}";
         setStyleSheet(qss);
     }
@@ -133,10 +136,8 @@ void CenterWindow::addPage(const QString &name, QWidget *widget)
     }
 
     QPushButton *btn = new QPushButton(name, this);
-
     QCursor handCursor(Qt::PointingHandCursor);
     btn->setCursor(handCursor);
-
     btn->setProperty("btn-type", "nav-button");
     btn->setCheckable(true);
     btn->setFixedSize(btn_w, btn_h);

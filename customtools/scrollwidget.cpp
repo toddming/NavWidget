@@ -10,14 +10,16 @@
 #include <QDebug>
 
 
-#include "ElaScrollArea.h"
-#include "ElaScrollBar.h"
-
 ScrollWidget::ScrollWidget(QWidget* parent)
     : QWidget(parent)
 { 
-
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, [=](){
+        floatVScrollBar->setVisible(false);
+    });
+    timer->setInterval(2000);
 }
+
 
 void ScrollWidget::setWidget(QWidget *topWidget, QWidget *cenWidget)
 {
@@ -36,7 +38,7 @@ void ScrollWidget::setWidget(QWidget *topWidget, QWidget *cenWidget)
     scrollArea->setIsOverShoot(Qt::Vertical, true);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ElaScrollBar* floatVScrollBar = new ElaScrollBar(scrollArea->verticalScrollBar(), scrollArea);
+    floatVScrollBar = new ElaScrollBar(scrollArea->verticalScrollBar(), scrollArea);
     floatVScrollBar->setIsAnimation(true);
 
     if (topWidget != nullptr) {
@@ -44,9 +46,62 @@ void ScrollWidget::setWidget(QWidget *topWidget, QWidget *cenWidget)
         main_lay->addWidget(topWidget);
     }
     main_lay->addWidget(scrollArea);
-
     cenWidget->setProperty("widget-type", "base-widget");
     cenWidget->setStyleSheet("QWidget[widget-type=base-widget]{background-color:transparent;border:0px;}");
     scrollArea->setWidget(cenWidget);
+
+    m_topWidget = topWidget;
+    m_cenWidget = cenWidget;
 }
 
+void ScrollWidget::showEvent(QShowEvent *)
+{
+    floatVScrollBar->setVisible(false);
+    floatVScrollBar->setValue(floatVScrollBar->minimum());
+
+    if (m_cenWidget != nullptr) {
+        QTimer::singleShot(100, this, [=]() {
+            QWidget* currentWidget = m_cenWidget;
+            QPropertyAnimation* currentWidgetAnimation = new QPropertyAnimation(currentWidget, "pos");
+            currentWidgetAnimation->setEasingCurve(QEasingCurve::OutCubic);
+            currentWidgetAnimation->setDuration(200);
+            QPoint currentWidgetPos = currentWidget->pos();
+            currentWidgetAnimation->setEndValue(currentWidgetPos);
+            currentWidgetPos.setY(currentWidgetPos.y() + 200);
+            currentWidgetAnimation->setStartValue(currentWidgetPos);
+            currentWidgetAnimation->start(QAbstractAnimation::DeleteWhenStopped);
+        });
+    }
+}
+
+bool ScrollWidget::event(QEvent* event)
+{
+    switch (event->type())
+    {
+    case QEvent::Enter:
+    {
+        floatVScrollBar->setVisible(true);
+        if (timer->isActive()) {
+            timer->stop();
+        }
+        break;
+    }
+    case QEvent::Leave:
+    {
+        if (timer->isActive()) {
+            timer->stop();
+        }
+        timer->start();
+        break;
+    }
+    case QEvent::MouseMove:
+    {
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+    return QWidget::event(event);
+}

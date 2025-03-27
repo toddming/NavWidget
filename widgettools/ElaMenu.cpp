@@ -18,6 +18,11 @@ ElaMenu::ElaMenu(QWidget* parent)
     setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setObjectName("ElaMenu");
+
+    QFont font = this->font();
+    font.setPointSize(10);
+    this->setFont(font);
+
     d->_menuStyle = new ElaMenuStyle(style());
     setStyle(d->_menuStyle);
     d->_pAnimationImagePosY = 0;

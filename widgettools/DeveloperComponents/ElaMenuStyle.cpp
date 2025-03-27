@@ -26,10 +26,8 @@ void ElaMenuStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* o
     {
     case QStyle::PE_PanelMenu:
     {
-        // 高性能阴影
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing);
-        //eTheme->drawEffectShadow(painter, option->rect, _shadowBorderWidth, 6);
         // 背景绘制
         QRect foregroundRect(_shadowBorderWidth, _shadowBorderWidth, option->rect.width() - 2 * _shadowBorderWidth, option->rect.height() - 2 * _shadowBorderWidth);
         painter->setPen(ElaThemeColor(_themeMode, PopupBorder));

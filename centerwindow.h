@@ -15,6 +15,7 @@
 #include <QStackedWidget>
 #include <QLabel>
 #include <QPropertyAnimation>
+#include <QTimer>
 #include <QDebug>
 
 #include "ElaTheme.h"
