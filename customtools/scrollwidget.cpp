@@ -27,7 +27,7 @@ void ScrollWidget::setWidget(QWidget *topWidget, QWidget *cenWidget)
         return;
 
     QVBoxLayout *main_lay = new QVBoxLayout(this);
-    main_lay->setContentsMargins(2, 0, 2, 0);
+    main_lay->setContentsMargins(0, 0, 0, 0);
     main_lay->setSpacing(1);
 
     scrollArea = new ElaScrollArea(this);
