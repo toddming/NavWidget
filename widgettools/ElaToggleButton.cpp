@@ -141,7 +141,7 @@ void ElaToggleButton::paintEvent(QPaintEvent* event)
     // 底边线绘制
     if (!d->_isPressed && !d->_isToggled)
     {
-        painter.setPen(ElaThemeColor(d->_themeMode, BasicBaseLine));
+        //painter.setPen(ElaThemeColor(d->_themeMode, BasicBaseLine));
         painter.drawLine(foregroundRect.x() + d->_pBorderRadius, height() - 1, foregroundRect.x() + foregroundRect.width() - d->_pBorderRadius, height() - 1);
     }
 

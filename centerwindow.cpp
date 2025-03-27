@@ -68,9 +68,9 @@ void CenterWindow::paintEvent(QPaintEvent *event)
 
     painter.setRenderHint(QPainter::Antialiasing, false);
 
-    QColor color = _themeMode == ElaThemeType::Dark ? QColor("#554F4F") : QColor("#DCDCDC");
-    color.setAlpha(128);
-    QPen pen(color);
+    QColor _color = ElaThemeColor(_themeMode, BasicBaseLine);
+    _color.setAlpha(128);
+    QPen pen(_color);
     pen.setWidthF(1);
     painter.setPen(pen);
     painter.drawLine(0, m_toph, rect().right(), m_toph);
