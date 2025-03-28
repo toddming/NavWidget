@@ -42,7 +42,7 @@ private:
 
     QRect m_rect;
 
-    void startRectAnimation(QRect targetRect);
+    void startRectAnimation(QRect targetRect, int duration);
 
 };
 

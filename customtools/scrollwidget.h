@@ -10,15 +10,16 @@
 
 class ScrollWidget : public QWidget
 {
+    Q_OBJECT
 public:
     explicit ScrollWidget(QWidget* parent = nullptr);
 
     void setWidget(QWidget *topWidget, QWidget *cenWidget);
 
+    void showWidget();
+
 protected:
     virtual bool event(QEvent* event) override;
-
-    virtual void showEvent(QShowEvent *) override;
 
 private:
 

@@ -86,6 +86,7 @@ void CenterWindow::on_btnGroup_clicked(QAbstractButton *btn)
     if (checkedButton != nullptr) {
         startTopyAnimation(checkedButton->pos().y());
         int nodeIndex = buttonGroup->buttons().indexOf(btn);
+        qobject_cast<ScrollWidget *>(stackedWidget->widget(nodeIndex))->showWidget();
         stackedWidget->setCurrentIndex(nodeIndex);
     }
 }
@@ -96,7 +97,8 @@ void CenterWindow::startTopyAnimation(int targetTopy) {
         m_topy = value.toInt();
         update();
     });
-    animation->setDuration(100);
+    animation->setEasingCurve(QEasingCurve::InQuart);
+    animation->setDuration(180);
     animation->setStartValue(m_topy);
     animation->setEndValue(targetTopy);
     animation->start(QAbstractAnimation::DeleteWhenStopped);

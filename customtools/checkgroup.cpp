@@ -95,7 +95,7 @@ void CheckGroup::paintEvent(QPaintEvent* event)
     }
 
     if (checkedButton != nullptr) {
-        QColor _color = ElaThemeColor(_themeMode, PrimaryNormal);
+        QColor _color = ElaThemeColor(ElaThemeType::Dark, PrimaryNormal);
 
         if (m_rect.x() < _pBorderRadius) {
             QPainterPath path;
@@ -133,13 +133,14 @@ void CheckGroup::paintEvent(QPaintEvent* event)
 void CheckGroup::on_btnGroup_clicked(QAbstractButton *btn)
 {
     checkedButton = btn;
-
-    if (m_rect == QRect(0, 0, 0, 0)) {
-        m_rect = QRect(btn->pos().x(), btn->pos().y(), 0, btn->height()).adjusted(0, 0, 1, 1);
-    }
-
     QRect _rect(btn->pos().x(), btn->pos().y(), btn->width(), btn->height());
-    startRectAnimation(_rect.adjusted(0, 0, 1, 1));
+    _rect = _rect.adjusted(0, 0, 1, 1);
+    if (m_rect == QRect(0, 0, 0, 0)) {
+        m_rect = _rect;
+        startRectAnimation(_rect, 1);
+    } else {
+        startRectAnimation(_rect, 180);
+    }
 }
 
 QRect CheckGroup::myRect() const {
@@ -153,14 +154,14 @@ void CheckGroup::setMyRect(const QRect &value) {
     }
 }
 
-void CheckGroup::startRectAnimation(QRect targetRect) {
+void CheckGroup::startRectAnimation(QRect targetRect, int duration) {
     QPropertyAnimation* animation = new QPropertyAnimation(this, "myRect");
     connect(animation, &QPropertyAnimation::valueChanged, this, [=](const QVariant& value) {
         m_rect = value.toRect();
         update();
     });
     animation->setEasingCurve(QEasingCurve::InQuart);
-    animation->setDuration(180);
+    animation->setDuration(duration);
     animation->setStartValue(m_rect);
     animation->setEndValue(targetRect);
     animation->start(QAbstractAnimation::DeleteWhenStopped);

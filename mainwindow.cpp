@@ -3,8 +3,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setAttribute(Qt::WA_DontCreateNativeAncestors);
-
     installWindowAgent();
 
     initUI();
@@ -84,6 +82,8 @@ bool MainWindow::event(QEvent *event) {
 }
 
 void MainWindow::installWindowAgent() {
+    setAttribute(Qt::WA_DontCreateNativeAncestors);
+
     windowAgent = new QWK::WidgetWindowAgent(this);
     windowAgent->setup(this);
 

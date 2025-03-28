@@ -17,7 +17,7 @@ ScrollWidget::ScrollWidget(QWidget* parent)
     connect(timer, &QTimer::timeout, this, [=](){
         floatVScrollBar->setVisible(false);
     });
-    timer->setInterval(2000);
+    timer->setInterval(1000);
 }
 
 
@@ -54,20 +54,20 @@ void ScrollWidget::setWidget(QWidget *topWidget, QWidget *cenWidget)
     m_cenWidget = cenWidget;
 }
 
-void ScrollWidget::showEvent(QShowEvent *)
+void ScrollWidget::showWidget()
 {
     floatVScrollBar->setVisible(false);
     floatVScrollBar->setValue(floatVScrollBar->minimum());
 
     if (m_cenWidget != nullptr) {
-        QTimer::singleShot(100, this, [=]() {
+        QTimer::singleShot(50, this, [=]() {
             QWidget* currentWidget = m_cenWidget;
             QPropertyAnimation* currentWidgetAnimation = new QPropertyAnimation(currentWidget, "pos");
-            currentWidgetAnimation->setEasingCurve(QEasingCurve::OutCubic);
+            currentWidgetAnimation->setEasingCurve(QEasingCurve::OutCirc);
             currentWidgetAnimation->setDuration(200);
             QPoint currentWidgetPos = currentWidget->pos();
             currentWidgetAnimation->setEndValue(currentWidgetPos);
-            currentWidgetPos.setY(currentWidgetPos.y() + 200);
+            currentWidgetPos.setY(currentWidgetPos.y() + 150);
             currentWidgetAnimation->setStartValue(currentWidgetPos);
             currentWidgetAnimation->start(QAbstractAnimation::DeleteWhenStopped);
         });
