@@ -21,6 +21,7 @@
 #include "ElaTheme.h"
 #include "customtools/usercard.h"
 #include "customtools/scrollwidget.h"
+#include "customtools/hiconbttton.h"
 
 class CenterWindow : public QWidget
 {

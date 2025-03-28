@@ -97,8 +97,7 @@ void CenterWindow::startTopyAnimation(int targetTopy) {
         m_topy = value.toInt();
         update();
     });
-    animation->setEasingCurve(QEasingCurve::InQuart);
-    animation->setDuration(180);
+    animation->setDuration(100);
     animation->setStartValue(m_topy);
     animation->setEndValue(targetTopy);
     animation->start(QAbstractAnimation::DeleteWhenStopped);
@@ -109,14 +108,8 @@ void CenterWindow::changeTheme(ElaThemeType::ThemeMode theme) {
     _themeMode = theme;
     if (theme == ElaThemeType::Dark) {
         cover_color = QColor(255, 255, 255, 30);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#D1D1D1;font-size: 17px;}"
-                      "QPushButton[btn-type=nav-button]:checked{color:white;}";
-        setStyleSheet(qss);
     } else {
         cover_color = QColor(0, 0, 0, 10);
-        QString qss = "QPushButton[btn-type=nav-button]{background-color:transparent;border-style:none;color:#808080;font-size: 17px;}"
-                      "QPushButton[btn-type=nav-button]:checked{color:black;}";
-        setStyleSheet(qss);
     }
 }
 
@@ -137,10 +130,11 @@ void CenterWindow::addPage(const QString &name, QWidget *widget)
         lay->addWidget(stackedWidget);
     }
 
-    QPushButton *btn = new QPushButton(name, this);
-    QCursor handCursor(Qt::PointingHandCursor);
-    btn->setCursor(handCursor);
-    btn->setProperty("btn-type", "nav-button");
+    HIconBttton *btn = new HIconBttton(ElaIconType::None, name, this);
+    QFont font = this->font();
+    font.setPointSize(13);
+    btn->setFont(font);
+
     btn->setCheckable(true);
     btn->setFixedSize(btn_w, btn_h);
     btn_lay->insertWidget(btn_lay->count() - 1, btn);
